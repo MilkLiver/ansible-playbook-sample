@@ -1,0 +1,8 @@
+collections:
+  # Install a collection for k8s from Ansible Galaxy.
+  - name: kubernetes.core
+    source: https://galaxy.ansible.com
+
+  # Install a collection for openshift from Ansible Galaxy.
+  - name: community.okd
+    source: https://galaxy.ansible.com
