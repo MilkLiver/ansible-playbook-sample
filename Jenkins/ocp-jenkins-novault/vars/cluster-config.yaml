@@ -1,0 +1,2 @@
+cluster_api_url: "https://api.ocp.olg.offline.com:6443"
+template_namespace_target: "jenkins-template01"
