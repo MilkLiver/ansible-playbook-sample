@@ -45,7 +45,7 @@ cd ansible-playbook-sample/Jenkins/ocp-jenkins-novault
 
 #### Configure Jenkins settings
 
-edit  [jenkins-parameters.env](parameter-files\jenkins-parameters.env) 
+edit  [jenkins-parameters.env](parameter-files/jenkins-parameters.env) 
 
 ```
 vi parameter-files/jenkins-parameters.env
@@ -80,7 +80,7 @@ JENKINS_PV_NAME=specific-pv01
 
 #### Configure OCP login settings
 
-edit  [ocp-oauth-secret.txt](secret-files\ocp-oauth-secret.txt) 
+edit  [ocp-oauth-secret.txt](secret-files/ocp-oauth-secret.txt) 
 
 ```
 vi secret-files/ocp-oauth-secret.txt
@@ -102,7 +102,7 @@ password: pass
 
 #### Configure OCP deploy settings
 
-edit  [cluster-config.yaml](vars\cluster-config.yaml) 
+edit  [cluster-config.yaml](vars/cluster-config.yaml) 
 
 ```
 vi vars/cluster-config.yaml
