@@ -100,6 +100,14 @@ objects:
             value: ${JENKINS_UC_INSECURE}
           - name: CASC_JENKINS_CONFIG
             value: /var/lib/jenkins/proxy.yaml
+          - name: INSTALL_PLUGINS
+            value: ${INSTALL_PLUGINS}
+          - name: OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG
+            value: ${OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG}
+          - name: OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS
+            value: ${OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS}
+          - name: OVERRIDE_RELEASE_MIGRATION_OVERWRITE
+            value: ${OVERRIDE_RELEASE_MIGRATION_OVERWRITE}
           image: ${JENKINS_IMAGE}
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -204,6 +212,22 @@ parameters:
   displayName: Enable OAuth in Jenkins
   name: ENABLE_OAUTH
   value: "true"
+- description: Set additional jenkins plugins.
+  displayName: Jenkins Plugins
+  name: INSTALL_PLUGINS
+  value: 
+- description: When running this image with an OpenShift persistent volume for the Jenkins config directory, the transfer of configuration from the image to the persistent volume is only done the first startup of the image as the persistent volume is assigned by the persistent volume claim creation. If you create a custom image that extends this image and updates configuration in the custom image after the initial startup, by default it will not be copied over, unless you set this environment variable to some non-empty value other than 'false'.
+  displayName: Set override image config true or false.
+  name: OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG
+  value: "false"
+- description: When running this image with an OpenShift persistent volume for the Jenkins config directory, the transfer of plugins from the image to the persistent volume is only done the first startup of the image as the persistent volume is assigned by the persistent volume claim creation. If you create a custom image that extends this image and updates plugins in the custom image after the initial startup, by default they will not be copied over, unless you set this environment variable to some non-empty value other than 'false'.
+  displayName: Set override image plugins true or false.
+  name: OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS
+  value: "false"
+- description: When running this image with an OpenShift persistent volume for the Jenkins config directory, and this image is starting in an existing deployment created with an earlier version of this image, unless the environment variable is set to some non-empty value other than 'false', the plugins from the image will replace any versions of those plugins currently residing in the Jenkins plugin directory.
+  displayName: Set release migration overwrite true or false.
+  name: OVERRIDE_RELEASE_MIGRATION_OVERWRITE
+  value: "false"
 - description: Set the specified PV name or not set.
   displayName: Persistent Volumn Name
   name: JENKINS_PV_NAME
