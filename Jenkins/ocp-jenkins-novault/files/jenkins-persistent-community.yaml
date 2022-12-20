@@ -137,6 +137,9 @@ objects:
             name: ${JENKINS_SERVICE_NAME}-data
           - mountPath: /etc/pki/ca-trust/source/anchors
             name: ${JENKINS_SERVICE_NAME}-trusted-ca-bundle
+          - mountPath: /opt/openshift/configuration/config.xml.tpl
+            subPath: config.xml.tpl
+            name: config-xml-tpl
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         serviceAccountName: ${JENKINS_SERVICE_NAME}
@@ -148,6 +151,11 @@ objects:
             name: ${JENKINS_SERVICE_NAME}-trusted-ca-bundle
             optional: true
           name: ${JENKINS_SERVICE_NAME}-trusted-ca-bundle
+        - configMap:
+            defaultMode: 0664
+            name: config-xml-tpl
+            optional: true
+          name: config-xml-tpl
 - apiVersion: v1
   kind: ServiceAccount
   metadata:

@@ -29,6 +29,26 @@
         kind: Namespace
         name: "{{ template_namespace_target }}"
 
+    - name: slurp config.xml.tpl
+      slurp:
+        src: "../files/config.xml.tpl"
+      register: config_xml_tpl
+
+    - name: create the configmap config.xml.tpl
+      k8s:
+        state: present
+        api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+        host: "{{ cluster_api_url }}"
+        validate_certs: no
+        namespace: "{{ template_namespace_target }}"
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: config-xml-tpl
+          data:
+            "config.xml.tpl": "{{ config_xml_tpl.content | b64decode }}"
+
     - name: Process a template in the cluster
       community.okd.openshift_process:
         api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
